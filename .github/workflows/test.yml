@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  test:
+  test-linux:
     runs-on: ubuntu-latest
     services:
       nginx:
@@ -14,5 +14,20 @@ jobs:
 
     steps:
     - name: Run tests
+      shell: pwsh
       run: |
         curl -vvv http://localhost:8080
+
+  test-windows:
+    runs-on: windows-latest
+    services:
+      nginx:
+        image: nginx:latest
+        ports:
+          - 8080:80
+
+    steps:
+    - name: Run tests
+      shell: pwsh
+      run: |
+        iwr http://localhost:8080
