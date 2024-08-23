@@ -1,0 +1,18 @@
+name: Service Test
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      nginx:
+        image: nginx:latest
+        ports:
+          - 8080:80
+
+    steps:
+    - name: Run tests
+      run: |
+        curl -vvv http://localhost:8080
